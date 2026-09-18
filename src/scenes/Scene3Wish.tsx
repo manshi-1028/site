@@ -17,7 +17,7 @@ export default function Scene3Wish({ config, onNext }: Props) {
         {config.name}
       </h1>
       <div style={{ margin: '8px 0 14px' }}>
-        <DayCounter startDate={config.startDate} endDate={config.counterEndDate} />
+        <DayCounter startDate={config.startDate} />
       </div>
       <p className="hand" style={{ fontSize: 19, color: 'var(--plum-deep)', maxWidth: 320 }}>
         today is all about you, {config.petNames.wish}.

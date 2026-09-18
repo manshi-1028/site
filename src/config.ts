@@ -25,7 +25,6 @@ export const CONFIG: AppConfig = {
   },
 
   startDate: '2025-05-18',
-  counterEndDate: '2026-12-18',
   nextOccasion: '2027-06-01',
 
   milestones: [

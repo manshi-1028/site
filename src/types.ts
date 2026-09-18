@@ -64,7 +64,6 @@ export interface AppConfig {
     closing: string // "babie"
   }
   startDate: string // ISO date, relationship start
-  counterEndDate: string // ISO date, target date the day counter counts to
   nextOccasion: string // ISO date for the countdown chip
   milestones: Milestone[]
   tenThings: { text: string; icon: string }[]
