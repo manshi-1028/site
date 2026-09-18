@@ -15,7 +15,7 @@ import type { AppConfig } from './types'
  */
 export const CONFIG: AppConfig = {
   password: '26062025',
-  name: 'Anmol',
+  name: 'babe',
 
   petNames: {
     wish: 'baby',
