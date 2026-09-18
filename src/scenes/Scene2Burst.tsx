@@ -57,19 +57,9 @@ export default function Scene2Burst({ onDone, reducedMotion }: Props) {
 
   return (
     <div className="flower-spiral-scene">
-
-      {/* ================================
-          CENTER FLOWER
-          ================================ */}
-
       <div className="spiral-center-flower">
         <Flower size={58} kawaii />
       </div>
-
-
-      {/* ================================
-          EXPANDING FLOWER SPIRAL
-          ================================ */}
 
       {!reducedMotion &&
         flowers.map((flower, i) => (
@@ -97,11 +87,6 @@ export default function Scene2Burst({ onDone, reducedMotion }: Props) {
           </div>
         ))}
 
-
-      {/* ================================
-          FLYING PETALS
-          ================================ */}
-
       {!reducedMotion &&
         petals.map((petal, i) => (
           <div
@@ -116,11 +101,6 @@ export default function Scene2Burst({ onDone, reducedMotion }: Props) {
             }
           />
         ))}
-
-
-      {/* ================================
-          SPARKLES
-          ================================ */}
 
       {!reducedMotion &&
         sparkles.map((sparkle, i) => (
@@ -137,15 +117,9 @@ export default function Scene2Burst({ onDone, reducedMotion }: Props) {
           />
         ))}
 
-
-      {/* ================================
-          CENTER SPARKLE
-          ================================ */}
-
       <div className="spiral-message">
         ✨
       </div>
-
     </div>
   )
 }
