@@ -109,10 +109,6 @@ export default function Scene8Cake({ candleCount = 6, onNext, onBlip }: Props) {
             <circle cx="110" cy="58" r="8" fill="#c94f6d" />
             <path d="M110 50 Q116 38 124 34" stroke="#4a7a4a" strokeWidth="2" fill="none" strokeLinecap="round" />
             <ellipse cx="107" cy="55" rx="2" ry="1.4" fill="rgba(255,255,255,0.6)" />
-
-            <text x="110" y="98" textAnchor="middle" fontFamily="var(--font-hand)" fontSize="20" fill="var(--plum-deep)">
-              ANMOL
-            </text>
           </svg>
 
           <div
