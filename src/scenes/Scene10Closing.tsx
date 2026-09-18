@@ -1,4 +1,3 @@
-```tsx
 import { useState } from 'react'
 import { Teddy, Camera, Envelope, Balloon } from '../components/Icons'
 import type { AppConfig } from '../types'
@@ -25,13 +24,8 @@ export default function Scene10Closing({
   const pick = (kind: CardKind) => {
     setOpened((prev) => new Set(prev).add(kind))
 
-    if (kind === 'camera') {
-      setShowPhotos(true)
-    }
-
-    if (kind === 'letter') {
-      setShowLetter(true)
-    }
+    if (kind === 'camera') setShowPhotos(true)
+    if (kind === 'letter') setShowLetter(true)
   }
 
   const releaseBalloon = () => {
@@ -63,9 +57,6 @@ export default function Scene10Closing({
 
   return (
     <div className="scene">
-
-      {/* Header */}
-
       <div
         style={{
           display: 'flex',
@@ -80,11 +71,7 @@ export default function Scene10Closing({
           className="fx-float"
         />
 
-        <svg
-          width="60"
-          height="30"
-          viewBox="0 0 60 30"
-        >
+        <svg width="60" height="30" viewBox="0 0 60 30">
           <rect
             x="4"
             y="6"
@@ -95,20 +82,8 @@ export default function Scene10Closing({
             stroke="var(--gold)"
             strokeWidth="1.5"
           />
-
-          <circle
-            cx="16"
-            cy="24"
-            r="4"
-            fill="var(--plum)"
-          />
-
-          <circle
-            cx="44"
-            cy="24"
-            r="4"
-            fill="var(--plum)"
-          />
+          <circle cx="16" cy="24" r="4" fill="var(--plum)" />
+          <circle cx="44" cy="24" r="4" fill="var(--plum)" />
         </svg>
       </div>
 
@@ -123,12 +98,6 @@ export default function Scene10Closing({
         these are for you ♡
       </p>
 
-
-      {/* =========================
-          ONLY TWO OPTIONS NOW
-          MUSIC REMOVED
-          ========================= */}
-
       <div
         style={{
           display: 'flex',
@@ -136,9 +105,6 @@ export default function Scene10Closing({
           marginBottom: 20,
         }}
       >
-
-        {/* CAMERA / PHOTOS */}
-
         <button
           onClick={() => pick('camera')}
           className="scrap-card fx-wiggle"
@@ -188,9 +154,6 @@ export default function Scene10Closing({
           )}
         </button>
 
-
-        {/* LETTER */}
-
         <button
           onClick={() => pick('letter')}
           className="scrap-card fx-wiggle"
@@ -239,13 +202,7 @@ export default function Scene10Closing({
             </span>
           )}
         </button>
-
       </div>
-
-
-      {/* =========================
-          PHOTO POPUP
-          ========================= */}
 
       {showPhotos && (
         <div
@@ -259,10 +216,9 @@ export default function Scene10Closing({
             maxWidth: 320,
           }}
         >
-          {(
-            config.photos.cardCamera.length > 0
-              ? config.photos.cardCamera
-              : ['', '', '']
+          {(config.photos.cardCamera.length > 0
+            ? config.photos.cardCamera
+            : ['', '', '']
           ).map((src, i) => (
             <div
               key={i}
@@ -295,11 +251,6 @@ export default function Scene10Closing({
           ))}
         </div>
       )}
-
-
-      {/* =========================
-          LETTER POPUP
-          ========================= */}
 
       {showLetter && (
         <div
@@ -368,16 +319,8 @@ export default function Scene10Closing({
         </div>
       )}
 
-
-      {/* =========================
-          AFTER OPENING
-          ========================= */}
-
       {opened.size > 0 && (
-        <div
-          className="fx-pop-in"
-          style={{ marginTop: 8 }}
-        >
+        <div className="fx-pop-in" style={{ marginTop: 8 }}>
           <p
             style={{
               fontSize: 16,
@@ -412,14 +355,9 @@ export default function Scene10Closing({
                       'var(--gold-soft)',
                     ][i]
                   }
-                  className={
-                    i >= released
-                      ? 'fx-wiggle'
-                      : ''
-                  }
+                  className={i >= released ? 'fx-wiggle' : ''}
                   style={{
-                    opacity:
-                      i < released ? 0.25 : 1,
+                    opacity: i < released ? 0.25 : 1,
                   }}
                 />
 
@@ -458,42 +396,6 @@ export default function Scene10Closing({
           </p>
         </div>
       )}
-
     </div>
   )
 }
-```
-
-### 2. IMPORTANT: Don't change `App.tsx`
-
-Actually, there's **one harmless cleanup** you can make later, but it isn't necessary for the site to work.
-
-Your `App.tsx` still passes:
-
-```tsx
-onPlayMelody={() => audio.playMelodyOnce(0.09)}
-```
-
-The new `Scene10Closing` simply doesn't use it. Your normal music remains controlled by `audio.start()` when the site unlocks.
-
-So **leave `App.tsx` exactly as it is for now.**
-
-### What changes
-
-Before:
-
-**🎵 Music | 📷 Photos | ✉️ Letter**
-
-After:
-
-**📷 Photos | ✉️ Letter**
-
-And importantly:
-
-**Background music earlier in the website = stays.**
-**Music option at the end = gone.**
-**Camera/photos = stays.**
-**Letter = stays.**
-**Balloons + "watch it again" = stays.**
-
-This is the only file you need to replace for this particular change.
