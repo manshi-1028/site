@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Flower, Heart } from '../components/Icons'
 
 interface Props {
