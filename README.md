@@ -1,4 +1,4 @@
-# for you, Anmol 🌷
+
 
 A password-locked, scrapbook-styled birthday surprise site. Built with
 Vite + React + TypeScript, zero backend, deploys straight to Vercel.
