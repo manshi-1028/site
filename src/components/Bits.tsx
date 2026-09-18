@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Teddy } from './Icons'
 
 /* ---------------- Day Counter ---------------- */
-export function DayCounter({ startDate, suffix = 'loving you' }: { startDate: string; suffix?: string }) {
+export function DayCounter({ startDate, endDate, suffix = 'loving you' }: { startDate: string; endDate: string; suffix?: string }) {
   const [tapped, setTapped] = useState(false)
   const tapCountRef = useRef(0)
   const [secret, setSecret] = useState(false)
 
-  const days = Math.max(0, Math.floor((Date.now() - new Date(startDate).getTime()) / 86400000))
+  const days = Math.max(0, Math.floor((new Date(endDate).getTime() - new Date(startDate).getTime()) / 86400000))
 
   const handleTap = () => {
     tapCountRef.current += 1
