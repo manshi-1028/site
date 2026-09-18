@@ -8,44 +8,144 @@ interface Props {
 
 export default function Scene2Burst({ onDone, reducedMotion }: Props) {
   useEffect(() => {
-    const t = window.setTimeout(onDone, reducedMotion ? 400 : 1800)
+    const t = window.setTimeout(
+      onDone,
+      reducedMotion ? 400 : 3200
+    )
+
     return () => window.clearTimeout(t)
   }, [onDone, reducedMotion])
 
-  const pieces = useMemo(
+  const flowers = useMemo(
     () =>
-      Array.from({ length: 22 }).map((_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        size: 24 + Math.random() * 30,
-        delay: Math.random() * 0.6,
-        rot: Math.random() * 360,
-        kawaii: Math.random() > 0.6,
-        heart: Math.random() > 0.75,
+      Array.from({ length: 48 }).map((_, i) => {
+        const angle = i * 43
+        const radius = 20 + i * 12
+        const size = 18 + (i % 5) * 7
+
+        return {
+          angle,
+          radius,
+          size,
+          delay: i * 0.045,
+          kawaii: i % 4 !== 0,
+          heart: i % 9 === 0,
+        }
+      }),
+    []
+  )
+
+  const petals = useMemo(
+    () =>
+      Array.from({ length: 35 }).map((_, i) => ({
+        angle: i * 51,
+        distance: 180 + i * 20,
+        delay: 0.7 + i * 0.035,
+      })),
+    []
+  )
+
+  const sparkles = useMemo(
+    () =>
+      Array.from({ length: 30 }).map((_, i) => ({
+        x: Math.cos(i * 1.8) * (150 + i * 14),
+        y: Math.sin(i * 1.8) * (150 + i * 14),
+        delay: 0.5 + i * 0.045,
       })),
     []
   )
 
   return (
-    <div className="scene" style={{ overflow: 'hidden' }}>
-      {pieces.map((p, i) => (
-        <div
-          key={i}
-          className={reducedMotion ? '' : 'fx-pop-in'}
-          style={{
-            position: 'absolute',
-            left: `${p.left}%`,
-            top: `${p.top}%`,
-            transform: `rotate(${p.rot}deg)`,
-            animationDelay: `${p.delay}s`,
-          }}
-        >
-          {p.heart ? <Heart size={p.size * 0.6} /> : <Flower size={p.size} kawaii={p.kawaii} />}
-        </div>
-      ))}
-      <p className="hand" style={{ position: 'relative', fontSize: 20, color: 'var(--plum-deep)', zIndex: 2 }}>
+    <div className="flower-spiral-scene">
+
+      {/* ================================
+          CENTER FLOWER
+          ================================ */}
+
+      <div className="spiral-center-flower">
+        <Flower size={58} kawaii />
+      </div>
+
+
+      {/* ================================
+          EXPANDING FLOWER SPIRAL
+          ================================ */}
+
+      {!reducedMotion &&
+        flowers.map((flower, i) => (
+          <div
+            key={`flower-${i}`}
+            className="spiral-flower"
+            style={
+              {
+                '--angle': `${flower.angle}deg`,
+                '--radius': `${flower.radius}px`,
+                '--flower-size': `${flower.size}px`,
+                '--delay': `${flower.delay}s`,
+                '--duration': `${2.2 + i * 0.015}s`,
+              } as React.CSSProperties
+            }
+          >
+            {flower.heart ? (
+              <Heart size={flower.size * 0.65} />
+            ) : (
+              <Flower
+                size={flower.size}
+                kawaii={flower.kawaii}
+              />
+            )}
+          </div>
+        ))}
+
+
+      {/* ================================
+          FLYING PETALS
+          ================================ */}
+
+      {!reducedMotion &&
+        petals.map((petal, i) => (
+          <div
+            key={`petal-${i}`}
+            className="spiral-petal"
+            style={
+              {
+                '--petal-angle': `${petal.angle}deg`,
+                '--petal-distance': `${petal.distance}px`,
+                '--petal-delay': `${petal.delay}s`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+
+
+      {/* ================================
+          SPARKLES
+          ================================ */}
+
+      {!reducedMotion &&
+        sparkles.map((sparkle, i) => (
+          <div
+            key={`sparkle-${i}`}
+            className="spiral-sparkle"
+            style={
+              {
+                '--sparkle-x': `${sparkle.x}px`,
+                '--sparkle-y': `${sparkle.y}px`,
+                '--sparkle-delay': `${sparkle.delay}s`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+
+
+      {/* ================================
+          CENTER SPARKLE
+          ================================ */}
+
+      <div className="spiral-message">
         ✨
-      </p>
+      </div>
+
     </div>
   )
 }
